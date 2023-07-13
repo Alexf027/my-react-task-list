@@ -1,0 +1,207 @@
+@import url('https://fonts.googleapis.com/css2?family=Kalam&display=swap');
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Kalam', cursive;
+}
+
+.container{
+	display: flex;
+    justify-content: center;
+    background: linear-gradient(to right bottom, white, white);
+    width: 100%;
+    min-height: 30vh;
+}
+
+.app-wrapper {
+	margin-top: 20px;
+    background-color: dodgerblue;
+    min-width: 80%;
+    min-height: 30vh;
+    padding: 20px 30px;
+    border-radius: 1rem;
+    box-shadow: 3px 6px 40px black;
+}
+
+h1 {
+	font-size: 50px;
+    color: white;
+}
+
+ul {
+	margin-top: 50px;
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+}
+
+ul li {
+	list-style: none;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: white;
+	border-radius: 0.6rem;
+}
+
+ul li span {
+	overflow: hidden;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	
+}
+
+ul li form {
+	flex: 1;
+	display: flex;
+	justify-content: space-between;
+}
+
+.input-update {
+	height: 4.5vh;
+	border: none;
+	font-weight: 500;
+	font-size: 21px;
+	color: #555;
+	width: 100%;
+	outline: none;
+	border-color: white;
+}
+
+.button-edit,
+.button-delete {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background-color: transparent;
+    border-radius: 50%;
+    font-size: 20px;
+}
+
+.container-done {
+	width: 20px;
+	height: 20px;
+	border-radius: 20px;
+	border: 2px solid dodgerblue;
+	cursor: pointer;
+	margin-right: 12px;
+	margin-left: 8px;
+}
+
+.container-done.active {
+	background-color: dodgerblue;
+}
+
+.text-decoration-dashed {
+	text-decoration: line-through;
+	color: dodgerblue;
+}
+
+.button-delete {
+    color: rgba(255, 0, 0, 0.612);
+    padding: 2px;
+    margin-right: 10px;
+}
+
+.button-delete i:hover{
+    transform: scale(1.3);
+    color: red;
+}
+
+.button-edit {
+    color: gray;
+    padding: 2px 0 2px;
+	margin-right: 7px;
+}
+
+.button-edit i:hover {
+    transform: scale(1.3);
+    color: black;
+}
+
+form { 
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: white;
+	border-radius: .7rem;
+}
+
+.add-todo h3 {
+	text-align: center;
+	margin-bottom: 40px;
+	font-size: 23px;
+}
+
+.add-task {
+    display: grid;
+    color: dodgerblue;
+    padding: 0 15px;
+    font-size: 30px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+.add-task i:hover{
+    transform: scale(1.3);
+    cursor: pointer;
+}
+
+.task-input {
+    width: 95%;
+    padding: 5px;
+    margin-left: 10px;
+    font-size: 27px;
+    color: dodgerblue;
+    border-radius: .7rem;
+	outline: none;
+	border: none;
+}
+
+.btn-add {
+	border: none;
+	color: #fff;
+	padding: 5px 40px;
+	border-radius: 20px;
+	font-family: inherit;
+	cursor: pointer;
+	font-size: 17px;
+}
+
+.btn-add:hover {
+	background-color: dodgerblue;
+}
+
+.advertisement {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5vh;
+}
+
+.button-clear-all {
+    font-size: 20px;
+    border-radius: .4rem;
+    border: none;
+    cursor: pointer;
+    background-color: rgba(255, 0, 0, 0.836);
+    color: white;
+    padding: 5px;
+}
+
+.button-clear-all:hover {
+    background-color: red;
+    transform: scale3d(1.3);
+}
+
+p {
+    font-size: 20px;
+}
+
+strong {
+    font-size: 20px;
+    color: white;
+}
