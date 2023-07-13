@@ -1,13 +1,16 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useForm } from '../hooks/useForm';
 
+
 export const TodoUpdate = ({ todo, handleUpdateTodo }) => {
+	
+	const [taskDescription, setTaskDescription] = useState('');
+	const [disabled, setDisabled] = useState(true);
+	const focusInputRef = useRef();
+
 	const { updateDescription, onInputChange } = useForm({
 		updateDescription: todo.description,
 	});
-
-	const [disabled, setDisabled] = useState(true);
-	const focusInputRef = useRef();
 
 	const onSubmitUpdate = e => {
 		e.preventDefault();
@@ -35,6 +38,8 @@ export const TodoUpdate = ({ todo, handleUpdateTodo }) => {
 				readOnly={disabled}
 				ref={focusInputRef}
 			/>
+			<textarea placeholder='description: ' value={taskDescription}
+				onChange={(e) => setTaskDescription(e.target.value)}/>
 			<button className='button-edit task-button' title="Edit task" type='submit'>
 			<i className="fa-regular fa-pen-to-square"></i>
 			</button>

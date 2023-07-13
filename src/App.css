@@ -192,6 +192,16 @@ form {
     padding: 5px;
 }
 
+textarea {
+	color: dodgerblue;
+	border-radius: .4rem;
+	border: none;
+	margin: 3px 8px;
+	outline: none;
+	border: 1px solid dodgerblue;
+	resize: none;
+}
+
 .button-clear-all:hover {
     background-color: red;
     transform: scale3d(1.3);
