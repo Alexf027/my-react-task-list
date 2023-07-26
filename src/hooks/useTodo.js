@@ -5,7 +5,7 @@ export const useTodo = () => {
 	const initialState = [];
 
     const init = () => {
-        return JSON.parse(localStorage.getItem('todos')) || []
+        return JSON.parse(localStorage.getItem('todos')) || [];
     }
 
 	const [todos, dispatch] = useReducer(
@@ -55,7 +55,7 @@ export const useTodo = () => {
 		dispatch(action);
 	};
 
-	const handleUpdateTodo = (id, description) => {
+	const handleUpdateTodo = (id, description ) => {
 		const action = {
 			type: 'Update Todo',
 			payload: {

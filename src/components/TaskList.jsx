@@ -21,6 +21,7 @@ export const TaskList = ({ handleNewTodo }) => {
 	}
 
 	return (
+		<div>
 		<form onSubmit={onFormSubmit}>
 			<input 
 			id='description'
@@ -35,5 +36,7 @@ export const TaskList = ({ handleNewTodo }) => {
 			<i className="fa-solid fa-square-plus"></i>
 			</button>
 		</form>
+		<h3>These are your tasks</h3>
+		</div>
 	);
 };

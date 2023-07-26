@@ -1,42 +1,30 @@
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
-import Header from './components/Header';
-import { TaskList } from './components/TaskList';
-import { TodoList } from './components/TodoList';
-import { useTodo } from './hooks/useTodo';
+import { Menu } from './components/Menu';
+import { Homepage } from './pages/Homepage';
+import { Taskpage } from './pages/Taskpage';
+import { Aboutpage } from './pages/Aboutpage';
 
 function App() {
-	const {
-		todos,
-		tasksPending,
-		handleNewTodo,
-		handleDeleteTodo,
-		handleCompleteTodo,
-		handleUpdateTodo,
-		clearAll,
-	} = useTodo();
 
 	return (
-		<div className='container'>
-		<div className='app-wrapper'>
 		<div>
-			<Header/>
+			<BrowserRouter>
+				<Menu/>
+				<Routes>
+					<Route path='/' element={<Homepage/>}/>
+					<Route path='/task' element={<Taskpage/>}/>
+					<Route path='/about' element={<Aboutpage/>}/>
+					<Route path="*" element={(
+                    <>
+                    <h1>Error 404</h1> 
+                    <strong>This page does not exist</strong>
+                    </>
+                    )}/>
+				</Routes>
+			</BrowserRouter>
 		</div>
-		<div>
-		<TaskList handleNewTodo={handleNewTodo}/>
-		<TodoList
-			todos={todos}
-		    handleUpdateTodo={handleUpdateTodo}
-			handleDeleteTodo={handleDeleteTodo}
-			handleCompleteTodo={handleCompleteTodo}
-		/>
-		<div className='advertisement'>
-		<p>You have peding task: <strong>{tasksPending}</strong></p>
-		<button className="button-clear-all" title='Clear all' onClick={() =>clearAll()}>Clear All</button>
-		</div>
-		</div>
-		</div>
-		</div>
-	);
+	)
 }
 
 export default App;
