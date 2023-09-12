@@ -1,5 +1,7 @@
 import { useRef, useState } from 'react';
 import { useForm } from '../hooks/useForm';
+import { Flex, IconButton, Input } from '@chakra-ui/react';
+import { EditIcon } from '@chakra-ui/icons'
 
 
 export const TodoUpdate = ({ todo, handleUpdateTodo }) => {
@@ -8,16 +10,16 @@ export const TodoUpdate = ({ todo, handleUpdateTodo }) => {
 	const focusInputRef = useRef();
 
 	const { updateDescription, onInputChange } = useForm({
-		updateDescription: todo.description,
+		updateDescription: todo.name,
 	});
 
 	const onSubmitUpdate = e => {
 		e.preventDefault();
 
 		const id = todo.id;
-		const description = updateDescription;
+		const name = updateDescription;
 
-		handleUpdateTodo(id, description);
+		handleUpdateTodo(id, name);
 
 		setDisabled(!disabled);
 
@@ -26,7 +28,8 @@ export const TodoUpdate = ({ todo, handleUpdateTodo }) => {
 
 	return (
 		<form onSubmit={onSubmitUpdate}>
-			<input
+		<Flex>
+			<Input
 				type='text'
 				className={`input-update ${
 					todo.done ? 'text-decoration-dashed' : ''
@@ -37,9 +40,11 @@ export const TodoUpdate = ({ todo, handleUpdateTodo }) => {
 				readOnly={disabled}
 				ref={focusInputRef}
 			/>
-			<button className='button-edit task-button' title="Edit task" type='submit'>
-			<i className="fa-regular fa-pen-to-square"></i>
-			</button>
+			<IconButton 
+			bgColor='#EAEBEE'
+			type='submit'
+			icon={<EditIcon/>} />
+			</Flex>
 		</form>
 	);
 };

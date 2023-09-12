@@ -1,25 +1,27 @@
-import React from 'react'
+import { IconButton, FormLabel, Flex } from '@chakra-ui/react';
 import { TodoUpdate } from './TodoUpdate';
+import { CheckCircleIcon } from '@chakra-ui/icons'
+import { Delete } from './Delete';
 
 export const Task = ({
 	todo,
 	handleUpdateTodo,
-	handleDeleteTodo,
 	handleCompleteTodo,
 }) => {
+	
 	return (
-		<li>
-			<span onClick={() => handleCompleteTodo(todo.id)}>
-				<label title='Completed task'
+		<Flex justify='center'>
+			<IconButton 
+			bgColor='#EAEBEE'
+			color='green'
+			icon={<CheckCircleIcon/>}
+			onClick={() => handleCompleteTodo(todo.id)}
+			/>
+				<FormLabel 
 					className = {`container-done ${todo.done ? 'active' : ''}`}
-				></label>
-			</span>
+				></FormLabel>
 			<TodoUpdate todo={todo} handleUpdateTodo={handleUpdateTodo} />
-			<button
-				className='button-delete task-button' title='Delete task'
-				onClick={() => handleDeleteTodo(todo.id)}>
-				<i className="fa-solid fa-trash-can"></i>
-			</button>
-		</li>
+			<Delete/>
+			</Flex>
 	);
 };

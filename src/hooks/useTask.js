@@ -1,7 +1,8 @@
-import { useEffect, useReducer } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 import { todoReducer } from '../todoreducer';
 
-export const useTodo = () => {
+export const useTask = () => {
+	
 	const initialState = [];
 
     const init = () => {
@@ -55,8 +56,13 @@ export const useTodo = () => {
 		dispatch(action);
 	};
 
-	const handleUpdateTodo = (id, description ) => {
+	const handleUpdateTodo = (id, name,description ) => {
 		const action = {
+			type: 'Update Todo',
+			payload: {
+				id,
+				name,
+			},
 			type: 'Update Todo',
 			payload: {
 				id,

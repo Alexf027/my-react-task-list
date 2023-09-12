@@ -1,17 +1,24 @@
+import { Button, Flex, Input, Text } from '@chakra-ui/react';
 import { useForm } from '../hooks/useForm';
+import { AddIcon } from '@chakra-ui/icons'
+
 
 export const TaskList = ({ handleNewTodo }) => {
-	const { description, onInputChange, onResetForm, } = useForm({
+	const { name, description, onInputChange, onResetForm, } = useForm({
+		name: '',
 		description: '',
 	});
 
 	const onFormSubmit = e => {
 		e.preventDefault();
 
-		if (description.length <= 3) return;
+		if (name.length <= 3){
+			return alert("add a task");
+		}; 
 		
 		let newTodo = {
 			id: new Date().getTime(),
+			name: name,
 			description: description,
 			done: false,
 		};
@@ -21,22 +28,42 @@ export const TaskList = ({ handleNewTodo }) => {
 	}
 
 	return (
-		<div>
+		<>
+		<Flex justify='center'>
 		<form onSubmit={onFormSubmit}>
-			<input 
+			<Input 
+			w='20vw'
+			id='name'
+			type='text'
+			name='name'
+			value={name}
+			onChange={onInputChange}
+			placeholder='add task'
+			/>
+			<Input 
+			w='30vw'
 			id='description'
 			type='text'
-			className='task-input'
 			name='description'
 			value={description}
 			onChange={onInputChange}
-			placeholder='Add task'
+			placeholder='description'
 			/>
-			<button className="add-task" title="Add task" type='submit'>
-			<i className="fa-solid fa-square-plus"></i>
-			</button>
+			<Button
+			ml='15px'
+			mb='5px'
+			borderRadius='0' 
+            bg='#08376B' 
+            color='#F5F5F5'
+            _hover={{
+              color: '#08376B',
+            bg: '#F5F5F5'}}
+			title="add task" type='submit'>
+			<AddIcon/>
+			</Button>
 		</form>
-		<h3>These are your tasks</h3>
-		</div>
+		</Flex>
+		<Text textAlign='center'>These are your tasks</Text>
+		</>
 	);
 };
