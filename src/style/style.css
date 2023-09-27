@@ -5,3 +5,12 @@
     box-sizing: border-box;
     font-family: 'Cardo', serif;
 }
+
+span.error {
+    display: block;
+    color: rgb(3, 126, 250);
+    font-style: italic;
+    font-size: 0.8rem;
+    margin-top: 0.2rem;
+    margin-left: 0.6rem;
+}

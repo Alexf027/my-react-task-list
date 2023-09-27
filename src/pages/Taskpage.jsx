@@ -1,4 +1,3 @@
-import { useTask } from "../hooks/useTask";
 import {
   Heading,
   Table,
@@ -29,7 +28,6 @@ export const Taskpage = () => {
         <TableCaption placement='top'>Things to do</TableCaption>
           <Thead>
             <Tr>
-              <Th isNumeric>ID</Th>
               <Th>NAME</Th>
               <Th>DESCRIPTION</Th>
             </Tr>
@@ -43,7 +41,6 @@ export const Taskpage = () => {
           </Tbody>
           <Tfoot>
             <Tr>
-              <Th isNumeric>ID</Th>
               <Th>NAME</Th>
               <Th>DESCRIPTION</Th>
             </Tr>

@@ -1,27 +1,17 @@
-import { IconButton, FormLabel, Flex } from '@chakra-ui/react';
-import { TodoUpdate } from './TodoUpdate';
-import { CheckCircleIcon } from '@chakra-ui/icons'
-import { Delete } from './Delete';
+import { useState, useEffect } from "react";
+import { Card, Flex, IconButton, Input, Radio, } from "@chakra-ui/react";
+import { EditIcon, DeleteIcon } from "@chakra-ui/icons"
 
-export const Task = ({
-	todo,
-	handleUpdateTodo,
-	handleCompleteTodo,
-}) => {
-	
-	return (
-		<Flex justify='center'>
-			<IconButton 
-			bgColor='#EAEBEE'
-			color='green'
-			icon={<CheckCircleIcon/>}
-			onClick={() => handleCompleteTodo(todo.id)}
-			/>
-				<FormLabel 
-					className = {`container-done ${todo.done ? 'active' : ''}`}
-				></FormLabel>
-			<TodoUpdate todo={todo} handleUpdateTodo={handleUpdateTodo} />
-			<Delete/>
-			</Flex>
-	);
-};
+export const Task = () => {
+
+  return (
+    <Card bg="#F5F5F5" m="4" borderRadius="0">
+      <Flex>
+        <Radio ml="3" mr="3"></Radio>
+        <Input bg="#F5F5F5" borderRadius="0"/>
+        <IconButton bg="#F5F5F5" mr="1" icon={<EditIcon/>}/>
+        <IconButton bg="#F5F5F5" color="red" icon={<DeleteIcon/>}/>
+      </Flex>
+    </Card>
+  )
+}

@@ -1,69 +1,72 @@
-import { Button, Flex, Input, Text } from '@chakra-ui/react';
-import { useForm } from '../hooks/useForm';
+import "../style/style.css"
+import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { FormControl, Button, Input, Flex, Center, Box, Text } from "@chakra-ui/react";
 import { AddIcon } from '@chakra-ui/icons'
 
+export function TaskList() {
+    const { 
+        register, 
+        handleSubmit, 
+        trigger, 
+        formState: { errors, isSubmitting } } = useForm();
+    
+    const onSubmit = (e) => {
+        console.log(e)
+        };
 
-export const TaskList = ({ handleNewTodo }) => {
-	const { name, description, onInputChange, onResetForm, } = useForm({
-		name: '',
-		description: '',
-	});
 
-	const onFormSubmit = e => {
-		e.preventDefault();
+  return (
+    <Box mb="25px">
+    <form onSubmit={handleSubmit(onSubmit)}>
+    <FormControl>
+    <Center>
+    <Flex flexDir="column">
+    <Input
+      name="taskName" 
+      type="text"
+      placeholder="Add task"
+      borderRadius="0"
+      w="20vw"
+      ml="4"
+      {...register ("Name", { required: true,
+      minLength: {value: 4, message: "Name your task"}})}
+    />
+    {errors.Name && <Text size="xs" color="red" ml="4">{errors.Name.message}</Text>}
+    </Flex>
+    <Flex flexDir="column">
+    <Input
+      ml="2"
+      name="taskDescription"
+      type="text"
+      placeholder="Description"
+      borderRadius="0"
+      width="27vw"
+      {...register ("Description", { required: true,
+      minLength: {value: 4, message: "Assign a description"}})}
+    />
+    {errors.Description && <Text size="xs" color="red">{errors.Description.message}</Text>}
+    </Flex>
+    <Button
+    type="submit"
+    mr="4"
+    ml="2"
+    borderRadius="0"
+    bg='#08376B' 
+    color='#F5F5F5'
+    _hover={{
+        color: '#F5F5F5',
+        bg: '#08579B'}}
+        onClick={() => {
+          trigger(["taskName", "taskDescription"]);
+        }}
+        disabled= {isSubmitting}>
+    <AddIcon/>
+    </Button>
+    </Center>
+    </FormControl>
+    </form>
+    </Box>
+  )
+}
 
-		if (name.length <= 3){
-			return alert("add a task");
-		}; 
-		
-		let newTodo = {
-			id: new Date().getTime(),
-			name: name,
-			description: description,
-			done: false,
-		};
-
-		handleNewTodo(newTodo);
-		onResetForm();
-	}
-
-	return (
-		<>
-		<Flex justify='center'>
-		<form onSubmit={onFormSubmit}>
-			<Input 
-			w='20vw'
-			id='name'
-			type='text'
-			name='name'
-			value={name}
-			onChange={onInputChange}
-			placeholder='add task'
-			/>
-			<Input 
-			w='30vw'
-			id='description'
-			type='text'
-			name='description'
-			value={description}
-			onChange={onInputChange}
-			placeholder='description'
-			/>
-			<Button
-			ml='15px'
-			mb='5px'
-			borderRadius='0' 
-            bg='#08376B' 
-            color='#F5F5F5'
-            _hover={{
-              color: '#08376B',
-            bg: '#F5F5F5'}}
-			title="add task" type='submit'>
-			<AddIcon/>
-			</Button>
-		</form>
-		</Flex>
-		<Text textAlign='center'>These are your tasks</Text>
-		</>
-	);
-};

@@ -1,5 +1,5 @@
 {
-  "name": "lista-tareas-use-reducer",
+  "name": "todo-app",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -14,9 +14,8 @@
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@fontsource/roboto": "^5.0.8",
-    "@mui/material": "^5.14.6",
-    "@mui/styled-engine-sc": "^5.14.6",
     "@react-icons/all-files": "^4.1.0",
+    "axios": "^1.5.1",
     "framer-motion": "^10.13.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

@@ -1,4 +1,4 @@
-import { MyTaskList } from "../components/MyTaskList";
+import {TodoApp} from "../components/TodoApp"
 import derecha from "../images/derecha.png";
 import izquierda from "../images/izquierda.png";
 import { 
@@ -43,6 +43,6 @@ export function Homepage() {
     </Flex>
     </Flex>
   ):(
-    <MyTaskList/>
+    <TodoApp/>
   )
 }

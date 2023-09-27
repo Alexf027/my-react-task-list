@@ -1,8 +1,16 @@
-import { Flex, Heading, Text } from "@chakra-ui/react";
+import { Box, Heading, Text, VStack } from "@chakra-ui/react";
 
 export function Header(){
-    return <Flex textAlign='center' flexDir='column'>
-    <Heading size='2xl' as='h2' color='#08376B'>Todo App</Heading>
-    <Text mr='8rem' fontSize='sm'>Meeting goals</Text>
-    </Flex>
+    return (
+        <Box>
+        <VStack spacing="2">
+        <Heading  
+            as="h1"
+            fontWeight="300"
+            fontSize="26px"
+            letterSpacing="-0.5px" >Todo App</Heading>
+        <Text fontSize='sm'>Meeting goals</Text>
+        </VStack>
+        </Box>
+    )
 }
