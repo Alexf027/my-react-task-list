@@ -1,72 +1,64 @@
 import "../style/style.css"
 import { useForm } from "react-hook-form";
-import { useState } from "react";
-import { FormControl, Button, Input, Flex, Center, Box, Text } from "@chakra-ui/react";
+import { FormControl, Button, Input, Flex, Center, Box } from "@chakra-ui/react";
 import { AddIcon } from '@chakra-ui/icons'
+import { useTasks } from "../context/TasksContext";
+import { useNavigate } from "react-router-dom"
 
 export function TaskList() {
-    const { 
-        register, 
-        handleSubmit, 
-        trigger, 
-        formState: { errors, isSubmitting } } = useForm();
-    
-    const onSubmit = (e) => {
-        console.log(e)
-        };
+  const { register, handleSubmit } = useForm();
 
+  const { createTask } = useTasks();
+  const navigate = useNavigate();
+  
+  const onSubmit = (data) => {
+    createTask(data);
+    navigate('/tasks')
+  };
 
   return (
-    <Box mb="25px">
+    <Box m={6} w="full">
     <form onSubmit={handleSubmit(onSubmit)}>
     <FormControl>
     <Center>
-    <Flex flexDir="column">
+    <Flex mb={5}>
     <Input
-      name="taskName" 
+      name="title" 
       type="text"
       placeholder="Add task"
       borderRadius="0"
-      w="20vw"
-      ml="4"
-      {...register ("Name", { required: true,
-      minLength: {value: 4, message: "Name your task"}})}
+      w="full"
+      autoFocus
+      {...register("title")}
     />
-    {errors.Name && <Text size="xs" color="red" ml="4">{errors.Name.message}</Text>}
     </Flex>
-    <Flex flexDir="column">
-    <Input
-      ml="2"
-      name="taskDescription"
+    </Center>
+    <Center>
+      <Flex>
+      <Input
+      w="full"
+      name="description"
       type="text"
       placeholder="Description"
       borderRadius="0"
-      width="27vw"
-      {...register ("Description", { required: true,
-      minLength: {value: 4, message: "Assign a description"}})}
+      {...register("description")}
     />
-    {errors.Description && <Text size="xs" color="red">{errors.Description.message}</Text>}
-    </Flex>
     <Button
     type="submit"
-    mr="4"
-    ml="2"
+    mr="2"
+    ml="4"
     borderRadius="0"
     bg='#08376B' 
     color='#F5F5F5'
     _hover={{
         color: '#F5F5F5',
-        bg: '#08579B'}}
-        onClick={() => {
-          trigger(["taskName", "taskDescription"]);
-        }}
-        disabled= {isSubmitting}>
+        bg: '#08579B'}}>
     <AddIcon/>
     </Button>
+      </Flex>
     </Center>
     </FormControl>
     </form>
     </Box>
   )
 }
-

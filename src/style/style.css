@@ -14,3 +14,9 @@ span.error {
     margin-top: 0.2rem;
     margin-left: 0.6rem;
 }
+
+.range {
+  margin-left: 22px;
+  color: #08376B;
+  width: 70px;
+}

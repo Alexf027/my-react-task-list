@@ -1,90 +1,116 @@
 import { Link } from "react-router-dom";
-import { Button, Flex, Image, IconButton } from "@chakra-ui/react";
+import { FcHome, FcList, FcTodoList, FcAbout } from "react-icons/fc"
+import { RiLoginBoxLine, RiLogoutBoxLine } from "react-icons/ri"
+import { BiSolidHomeSmile } from "react-icons/bi"
+import { Flex, Image, IconButton, Center, Avatar } from "@chakra-ui/react";
 import { DarkMode } from "../DarkMode";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import Logo from '../images/Logo.jpg'
 import { useState } from "react";
 import Logo2 from '../images/Logo2.jpg'
+import { useAuth } from "../context/authContext";
 
 export function Menu() {
 
   const [display, changeDisplay] = useState("none");
 
+  const { isAuthenticated, logout } = useAuth();
+
   return (
-    <Flex>
+    <Flex justify="space-between">
+    <Link to='/'>
     <Image
-			ml='30px' 
-			boxSize='120px' 
+      ml={6}
+			h="85px"
+      w="90px"
 			src={Logo} 
 			alt='Todo App'/>
+      </Link>
     <Flex
     pos='absolute'
     top='1rem'
     right='1rem'
     align='center'>
     <DarkMode/>
-    <Flex display={["none", "none", "flex", "flex"]}>
+    <Avatar mt={1} ml={1} pb={1}/>
+    <Flex mt={1} display={["none", "none", "flex", "flex"]}>
     <Link to="/">
-            <Button
-            mr={2}
-            my={6} w="100%"
-            borderRadius='0' 
-            bg='#F5F5F5' 
-            color='#08376B'
-            _hover={{
-              color: '#F5F5F5',
-            bg: '#08376B'}}>HOME</Button>
-          </Link>
-          <Link to="/task">
-            <Button 
-            mr={2}
-            my={6} w="100%"
-            borderRadius='0' 
-            bg='#F5F5F5' 
-            color='#08376B'
-            _hover={{
-              color: '#F5F5F5',
-            bg: '#08376B'}}>TASK</Button>
+    <IconButton
+    ml={3}
+    borderRadius='0' 
+    bg='#F5F5F5'
+      icon={<BiSolidHomeSmile size='2rem' color="#08376B"/>}
+    /></Link>
+          
+    {isAuthenticated ? (
+      <>
+      <Link to="/todoapp">
+          <IconButton 
+          ml={4}
+          borderRadius='0' 
+    bg='#F5F5F5'
+      icon={<FcTodoList size='2rem'/>}
+    /></Link>
+    <Link to="/tasks">
+          <IconButton
+          ml={4}
+          borderRadius='0'  
+            bg='#F5F5F5'
+            icon={<FcList size='2rem'/>}
+          />  
           </Link>
           <Link to="/about">
-            <Button 
-            mr={2}
-            my={6} w="100%"
-            borderRadius='0' 
-            bg='#F5F5F5' 
-            color='#08376B'
-            _hover={{
-              color: '#F5F5F5',
-            bg: '#08376B'}}>ABOUT</Button>
-          </Link>
-    </Flex>
-    <Link to="/login">
-    <Button
+      <IconButton
+        ml={4}
+        borderRadius='0' 
+        bg='#F5F5F5'
+        icon={<FcAbout size='2rem'/>}
+      /></Link>
+      <Link to='/' onClick={() => {logout()}}>
+      <IconButton 
       mr={2}
-      my={4} w="100%"
-      borderRadius='0' 
-      bg='#F5F5F5' 
-      color='#08376B'
-      _hover={{
-        color: '#F5F5F5',
-        bg: '#08376B'}}>LOGIN</Button>
-    </Link>
+    ml={3}
+    borderRadius='0'
+    bg='#F5F5F5'
+    color="#08376B"
+        icon={<RiLogoutBoxLine size='2rem'/>}
+      />
+      </Link>
+      </>
+    ) : (
+      <>
+      <Link to="/about">
+      <IconButton
+        ml={4}
+        borderRadius='0' 
+        bg='#F5F5F5'
+        icon={<FcAbout size='2rem'/>}
+      /></Link>
+    <Link to="/login">
     <IconButton
+    mr={2}
+    ml={6}
+    borderRadius='0'
+    bg='#F5F5F5'
+    color="#08376B"
+    icon={<RiLoginBoxLine size='2rem'/>}/>
+    </Link>
+      </>
+    )}
+    </Flex>
+    <Center>
+    <IconButton
+    ml={3}
+    mt={1}
       borderRadius='0'
       bg='#F5F5F5' 
       color='#08376B'
-      _hover={{
-      color: '#F5F5F5',
-      bg: '#08376B'}}
-      my={4} w="100%"
-      aria-label="Open Menu"
-      size='lg'
-      fontSize='20px'
-      mr={2}
+      fontSize='25px'
       icon={<HamburgerIcon/>}
       display={[ "flex", "flex", "none", "none"]}
       onClick={() => changeDisplay("flex")}
     />
+    </Center>
     </Flex>
     <Flex flexDir='column'
     overflowY='auto'
@@ -94,7 +120,7 @@ export function Menu() {
     <Flex w='100vw'
     bgColor='#F5F5F5'
     zIndex={20}
-    h='76vh'
+    h='71vh'
     pos='fixed'
     top='0'
     left='0'
@@ -103,20 +129,19 @@ export function Menu() {
     display={display}
     >
     <Flex justify='space-between'>
+    <Link to='/'>
     <Image
-    mt={3}
-    ml={3}
-    h='55px'
+    mt={4}
+    ml={4}
+    h='40px'
 			src={Logo2} 
 			alt='Todo App'/>
+    </Link>
     <IconButton
     borderRadius="0"
-    fontSize='17px'
+    fontSize='15px'
     bg='#F5F5F5' 
       color='#08376B'
-      _hover={{
-      color: '#F5F5F5',
-      bg: '#08376B'}}
       mt={3}
       mr={3}
       aria-label="Close Menu"
@@ -127,41 +152,39 @@ export function Menu() {
     </Flex>
     <Flex flexDir="column" align="center">
     <Link to="/">
-            <Button
-            mr={2}
-            my={6} w="100%"
-            borderRadius='0' 
-            bg='#F5F5F5' 
-            color='#08376B'
-            _hover={{
-              color: '#F5F5F5',
-            bg: '#08376B'}}>HOME</Button>
+    <IconButton
+    mb={3}
+    borderRadius='0' 
+    bg='#F5F5F5'
+      icon={<FcHome size='2rem'/>}
+    />
           </Link>
-          <Link to="/task">
-            <Button 
-            mr={2}
-            my={6} w="100%"
-            borderRadius='0' 
-            bg='#F5F5F5' 
-            color='#08376B'
-            _hover={{
-              color: '#F5F5F5',
-            bg: '#08376B'}}>TASK</Button>
+          <Link to="/task-list">
+          <IconButton
+          mb={3} 
+          borderRadius='0' 
+    bg='#F5F5F5'
+      icon={<FcTodoList size='2rem'/>}
+    />
+          </Link>
+          <Link to="/tasks">
+          <IconButton
+          mb={3}
+          borderRadius='0'  
+            bg='#F5F5F5'
+            icon={<FcList size='2rem'/>}
+          />  
           </Link>
           <Link to="/about">
-            <Button 
-            mr={2}
-            my={6} w="100%"
-            borderRadius='0' 
-            bg='#F5F5F5' 
-            color='#08376B'
-            _hover={{
-              color: '#F5F5F5',
-            bg: '#08376B'}}>ABOUT</Button>
+          <IconButton
+          borderRadius='0' 
+            bg='#F5F5F5'
+            icon={<FcAbout size='2rem'/>}
+          />
           </Link>
     </Flex>
     </Flex>
     </Flex>
   </Flex>
-  );
-}
+  )
+};

@@ -1,17 +1,66 @@
-import { useState, useEffect } from "react";
-import { Card, Flex, IconButton, Input, Radio, } from "@chakra-ui/react";
-import { EditIcon, DeleteIcon } from "@chakra-ui/icons"
+import { CheckCircleIcon, DeleteIcon } from '@chakra-ui/icons';
+import { Card, Flex, Heading, VStack, Text, Center, Button, AlertDialogOverlay, AlertDialogContent, AlertDialogHeader, AlertDialogBody, AlertDialogFooter, ButtonGroup, IconButton } from '@chakra-ui/react';
+import { useTasks } from '../context/TasksContext';
+import { useDisclosure, AlertDialog } from '@chakra-ui/react';
+import { useRef } from 'react';
+import { UpdateTask } from './UpdateTask';
+import { Link } from 'react-router-dom';
 
-export const Task = () => {
+export const Task = ({ task }) => {
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const cancelRef = useRef();
 
-  return (
-    <Card bg="#F5F5F5" m="4" borderRadius="0">
-      <Flex>
-        <Radio ml="3" mr="3"></Radio>
-        <Input bg="#F5F5F5" borderRadius="0"/>
-        <IconButton bg="#F5F5F5" mr="1" icon={<EditIcon/>}/>
-        <IconButton bg="#F5F5F5" color="red" icon={<DeleteIcon/>}/>
-      </Flex>
+    const { deleteTask} = useTasks();
+
+  return (<Center>
+    <Card w='full' maxW='md' bg='zinc-800' borderRadius='0' p={2} >
+    <Flex justify='space-between'>
+    <IconButton 
+    color='#08579B'
+    icon={<CheckCircleIcon />}
+    bg='white' 
+    _hover={{ bg:'white', fontSize: "22px"}} />
+    <VStack>
+        <Heading color='#08579B' size='md'>{task.title}</Heading>
+        <Text>{task.description}</Text>
+        <Text>{new Date(task.date).toLocaleDateString()}</Text>
+    </VStack>
+        <ButtonGroup>
+            <Link to={`/tasks/${task._id}`}><UpdateTask/></Link> 
+            <IconButton 
+            color='red'
+            icon={<DeleteIcon/>}
+            onClick={onOpen} 
+            bg='white'
+            _hover={{ bg:'white', fontSize: "22px"}}/>
+            </ButtonGroup>
+            <AlertDialog
+            isOpen={isOpen}
+            leastDestructiveRef={cancelRef}
+            onClose={onClose}
+            >
+            <AlertDialogOverlay>
+                <AlertDialogContent borderRadius='0'>
+                    <AlertDialogHeader fontSize='lg' color='#08579B' >
+                    Delete Customer
+                    </AlertDialogHeader>
+                    <AlertDialogBody>
+                    Are you sure? You can't undo this action afterwards.
+                    </AlertDialogBody>
+                    <AlertDialogFooter>
+                    <Button ref={cancelRef} onClick={onClose} borderRadius='0'>
+                Cancel
+              </Button>
+              <Button colorScheme='red' onClick={() => deleteTask(task._id)} ml={3} borderRadius='0'>
+                Delete
+              </Button>
+                    </AlertDialogFooter>
+                </AlertDialogContent>
+            </AlertDialogOverlay>
+            </AlertDialog>
+        </Flex>
     </Card>
+    </Center>
   )
-}
+};
+

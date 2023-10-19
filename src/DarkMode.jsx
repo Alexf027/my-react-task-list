@@ -7,15 +7,12 @@ export const DarkMode = () => {
 
   return (
       <IconButton
-        mr='15px'
-        my={6} w="100%"
+      mt={1}
+      borderRadius="0"
         color='#08376B'
         bg='#F5F5F5'
         icon={isTheme ? <SunIcon/> : <MoonIcon/>}
-        aria-label="Toggle Theme"
         onClick={toggleColorMode}
-        _hover={{
-              color: '#F5F5F5',
-              bg: '#08376B'}} />
+        _hover={{color: '#08376B', fontSize: "22px"}} />
   )
 }
